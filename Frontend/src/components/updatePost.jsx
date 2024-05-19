@@ -39,9 +39,7 @@ const Updatepost = () => {
     if (!formData.description.trim()) {
       error.description = "description is required*";
     }
-    if (!formData.image.trim()) {
-      error.image = "image is required*";
-    } else if (Object.keys(error).length === 0) {
+     else if (Object.keys(error).length === 0) {
       try {
         await updatepost(formData, id);
         // alert("Blog Updates Sucessfully");

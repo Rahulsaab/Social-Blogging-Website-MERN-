@@ -115,8 +115,8 @@ authRouter.patch(
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "rahulpa424@gmail.com",
-    pass: "ptjs ldtu hqvw zaoh",
+    user: "rahulpa411@gmail.com",
+    pass: "hqvq absy jppj ieat",
   },
 });
 
@@ -129,7 +129,7 @@ authRouter.post("/sendmail", async (req, res) => {
       return res.status(404).json({ message: "email not found" });
     }
     const mailoption = {
-      from: "rahulpa424@gmail.com",
+      from: "rahulpa411@gmail.com",
       to: email,
       subject: "forgot password",
       text: `click on this link to reset password. http://localhost:3000/newpass/${email}`

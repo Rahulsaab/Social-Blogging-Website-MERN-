@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { RiRotateLockFill } from "react-icons/ri";
 import {useParams } from "react-router-dom"
 import { resetpassword} from "./api/endpoint";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Newpass = () => {
   // const navigate=useNavigate()
-  
+  const notify = () => toast("Password Reset Sucessfully");
   const [resetpass,setResetpass]=useState({
     newPassword:""
   })
@@ -42,21 +44,6 @@ const Newpass = () => {
             Enter your email and we will send send you a link to reset your
             password
           </div>
-          {/* <div>
-            <input
-              style={{
-                width: "300px",
-                height: "35px",
-                borderRadius: "12px",
-                border: "none",
-                // backgroundColor: "#ccc",
-              }}
-              type="text"
-              placeholder="enter email"
-              value={resetpass.email}
-              onChange={(e)=>setResetpass({...resetpass,email:e.target.value})}
-            />
-          </div> */}
           <div>
             <input
               style={{
@@ -96,7 +83,7 @@ const Newpass = () => {
                 backgroundColor: " #512da8",
                 color: "white",
               }}
-              onClick={()=>fetchresetpass()}
+              onClick={()=>{fetchresetpass();notify()}}
             >
               Submit
             </button>
