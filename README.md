@@ -6,6 +6,9 @@ It is designed for travellers to share their travel experiences on this website 
 ![Screenshot 2024-05-17 115656](https://github.com/Rahulsaab/Social-Blogging-Website-MERN-/assets/29977353/a26f4967-f805-4b4f-bd0a-f4a4e1bc9371)
 ![Screenshot 2024-05-17 115742](https://github.com/Rahulsaab/Social-Blogging-Website-MERN-/assets/29977353/9924642b-5e95-4834-86f7-f16bc04dae6d)
 ![Screenshot 2024-05-17 115753](https://github.com/Rahulsaab/Social-Blogging-Website-MERN-/assets/29977353/ea634ed2-cd9b-401a-b629-45b110770402)
+![Screenshot 2024-05-17 115704](https://github.com/Rahulsaab/Social-Blogging-Website-MERN-/assets/29977353/0c3cfbbd-a5ee-4260-8a7d-fbb9e9db504a)
+![Screenshot 2024-05-19 130336](https://github.com/Rahulsaab/Social-Blogging-Website-MERN-/assets/29977353/052b6805-cecd-4a36-bac0-9e97b908bff4)
+![Screenshot 2024-05-19 133926](https://github.com/Rahulsaab/Social-Blogging-Website-MERN-/assets/29977353/28e1b75c-5108-487d-a764-ae4386cb34b2)
 
 
 
