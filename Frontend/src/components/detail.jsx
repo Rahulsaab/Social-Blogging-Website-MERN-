@@ -60,7 +60,7 @@ useEffect(()=>{
           <div className="detail-page-main-image">
             <img
               className="detail-page-main-img"
-              src={`http://localhost:5689/${blogdetaildata.image}`}
+              src={`https://social-blog-api-r3az.onrender.com/${blogdetaildata.image}`}
               alt=""
             />
           </div>

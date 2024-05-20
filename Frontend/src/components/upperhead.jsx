@@ -29,7 +29,7 @@ const Upperhead = () => {
             <div className="right-side">
               <img
                 className="pfp"
-                src={`http://localhost:5689/${profile.profilePhoto}`}
+                src={`https://social-blog-api-r3az.onrender.com/${profile.profilePhoto}`}
                 alt=""
               />
               <select

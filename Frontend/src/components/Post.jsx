@@ -95,7 +95,7 @@ const Post = ({ item, fetchdata, render, setRender }) => {
       <div className="display1" key={item._id}>
         <img
           className="thumbnail"
-          src={`http://localhost:5689/${item.image}`}
+          src={`https://social-blog-api-r3az.onrender.com/${item.image}`}
           alt="ndsn "
         />
         <div className="about">{item.title} </div>
@@ -105,7 +105,7 @@ const Post = ({ item, fetchdata, render, setRender }) => {
           <div className="logo">
             <img
               className="author"
-              src={`http://localhost:5689/${profile.profilePhoto}`}
+              src={`https://social-blog-api-r3az.onrender.com/${profile.profilePhoto}`}
             />
           </div>
           <div className="author-name">
@@ -179,7 +179,7 @@ const Post = ({ item, fetchdata, render, setRender }) => {
                 <div className="logo9">
                   <img
                     className="author1"
-                    src={`http://localhost:5689/${profile.profilePhoto}`}
+                    src={`https://social-blog-api-r3az.onrender.com/${profile.profilePhoto}`}
                   />
                 </div>
 
