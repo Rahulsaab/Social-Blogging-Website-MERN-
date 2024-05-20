@@ -11,6 +11,6 @@
       "start-client": "cd Frontend && npm run start"
     },
     "keywords": [],
-    "author": "",
+    "author": "", 
     "license": "ISC"
   }
