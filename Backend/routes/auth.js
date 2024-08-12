@@ -91,10 +91,7 @@ authRouter.get("/profile/:id", async (req, res) => {
     console.log(err, "kjclvcs");
   }
 });
-authRouter.patch(
-  "/profile/:id",
-  upload.single("profilePhoto"),
-  async (req, res) => {
+authRouter.patch("/profile/:id",upload.single("profilePhoto"),async (req, res) => {
     const userId = req.params.id;
     try {
       const profilePhoto = req.file.path;
@@ -112,6 +109,8 @@ authRouter.patch(
     }
   }
 );
+
+
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {

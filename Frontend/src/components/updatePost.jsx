@@ -30,7 +30,7 @@ const Updatepost = () => {
   useEffect(() => {
     getdata();
   }, [id]);
-  const notify = () => toast("Blog Updated Sucessfully");
+  // const notify = () => toast("Blog Updated Sucessfully");
   const handleSubmited = async () => {
     const error = {};
     if (!formData.title.trim()) {
@@ -43,12 +43,11 @@ const Updatepost = () => {
       try {
         await updatepost(formData, id);
         // alert("Blog Updates Sucessfully");
-
-        // <Alert severity="error">Blog update Sucessfull</Alert>;
-
+        toast.success("Blog updated sucessfully")
         navigate("/createblog");
       } catch {
         setErr(error);
+        toast.error("Fail to update blog")
       }
     }
   };
@@ -120,7 +119,7 @@ const Updatepost = () => {
               className="post-btn"
               onClick={() => {
                 handleSubmited();
-                notify();
+               
               }}
             >
               Update

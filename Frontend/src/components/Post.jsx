@@ -35,8 +35,9 @@ const Post = ({ item, fetchdata, render, setRender }) => {
   const comment = async (id) => {
     try {
       await CommentDo(docomment, id);
-      // alert("comment successfully");
+      
       setRender(!render);
+      toast.info("Comment posted")
     } catch (err) {
       console.log(err);
     }
@@ -46,6 +47,7 @@ const Post = ({ item, fetchdata, render, setRender }) => {
       const res = await deletecomment(id, commentId);
       console.log(res.data)
       fetchdata();
+      toast.info("Comment deleted")
     } catch (err) {
       console.log(err, "error in cmnt dlt");
     }
@@ -70,7 +72,6 @@ const Post = ({ item, fetchdata, render, setRender }) => {
     "Dec",
   ];
   const createdDate = new Date(item.created_Date);
-  // console.log(createdDate);
   let day = createdDate.getDate();
   let monthindex = createdDate.getMonth();
   let month = months[monthindex];
@@ -83,13 +84,12 @@ const Post = ({ item, fetchdata, render, setRender }) => {
     try {
       await deletepost(id);
       fetchdata();
+      toast.info("Blog deleted")
     } catch (err) {
       console.log(err);
+      toast.error("Fail to delete blog")
     }
   };
-  
-  const notify = () => toast("Blog Deleted Sucessfully");
-
   return (
     <>
       <div className="display1" key={item._id}>
@@ -106,6 +106,7 @@ const Post = ({ item, fetchdata, render, setRender }) => {
             <img
               className="author"
               src={`https://social-blog-api-r3az.onrender.com/${profile.profilePhoto}`}
+              alt="xyz"
             />
           </div>
           <div className="author-name">
@@ -180,6 +181,7 @@ const Post = ({ item, fetchdata, render, setRender }) => {
                   <img
                     className="author1"
                     src={`https://social-blog-api-r3az.onrender.com/${profile.profilePhoto}`}
+                    alt="abc"
                   />
                 </div>
 
@@ -229,7 +231,7 @@ const Post = ({ item, fetchdata, render, setRender }) => {
               className="dlt"
               onClick={() => {
                 handleDelete(item._id);
-                notify();
+                
               }}
             >
               <MdDeleteSweep />

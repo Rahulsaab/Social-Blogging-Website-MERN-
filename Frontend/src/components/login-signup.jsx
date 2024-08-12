@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import "../componentCss/lognsign.css";
 import { Link, useNavigate } from "react-router-dom";
-// import axios from "axios";
 import { logindetail } from "./api/endpoint";
-import {  toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 
 const Loginsignup = () => {
   const navigate = useNavigate();
@@ -13,34 +11,40 @@ const Loginsignup = () => {
     email: "",
     password: "",
   });
-  const notify = () => toast("Login Sucessfully");
-  const [error, setError] = useState({});
-  const handlesubmit = async () => {
 
+  const [error, setError] = useState({});
+
+  const handlesubmit = async () => {
     const error = {};
     if (!formData.email.trim()) {
-      error.email = "email is required";
+      error.email = "Email is required";
     }
     if (!formData.password.trim()) {
-      error.password = "password is required";
+      error.password = "Password is required";
     }
-    else if (Object.keys(error).length === 0) {
-      const res = await logindetail(formData)
-      if (res.data.token) {
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("userId", res.data.userId);
-        // alert("Login Sucessfull");
-        navigate("/createblog");
+
+    setError(error);
+
+    if (Object.keys(error).length === 0) {
+      try {
+        const res = await logindetail(formData);
+        if (res.data.token) {
+          localStorage.setItem("token", res.data.token);
+          localStorage.setItem("userId", res.data.userId);
+          toast.success("Login successful!");
+          navigate("/createblog");
+        }
+      } catch (err) {
+        toast.error("Login failed! Please check your credentials and try again.");
       }
     }
-    setError(error);
-  }
+  };
 
   return (
     <div className="cont-log" id="cont-log">
       <div className="auth-container">
         <div className="form-container sign-in-container">
-          <main className="main-log" >
+          <main className="main-log">
             <h1>Login In</h1>
             <input
               type="text"
@@ -62,9 +66,16 @@ const Loginsignup = () => {
             {error.password && (
               <span className="error msg">{error.password}</span>
             )}
-            <div className="forgot-pass" style={{fontSize:"15px"}} onClick={() => {
-                navigate("/forgotpass")}}>Forgot Password?</div>
-            <button onClick={() => {handlesubmit();notify()}} >Login In</button>
+            <div
+              className="forgot-pass"
+              style={{ fontSize: "15px" }}
+              onClick={() => {
+                navigate("/forgotpass");
+              }}
+            >
+              Forgot Password?
+            </div>
+            <button onClick={handlesubmit}>Login In</button>
           </main>
         </div>
         <div className="toggle-container">

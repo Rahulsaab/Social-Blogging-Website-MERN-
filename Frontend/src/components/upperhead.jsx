@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { updateloginfo } from "./api/endpoint";
 const Upperhead = () => {
-    // const [alltile, setAlltile]=useState()
+    
     const [profile, setProfiledata] = useState({});
     const ProfileID = localStorage.getItem("userId");
   
@@ -15,7 +15,7 @@ const Upperhead = () => {
     };
     useEffect(() => {
       handlesave();
-    }, []);
+    },[]);
     const navigate = useNavigate();
   return (
     <>

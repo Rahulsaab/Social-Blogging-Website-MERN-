@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { changeprofile, getprofile, updateloginfo } from "./api/endpoint";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const UserInformation = () => {
@@ -9,20 +9,20 @@ const UserInformation = () => {
     userName: "",
     email: "",
     state: "",
-    pincode: ""
+    pincode: "",
+    country: "",
   });
-  const notify = () => toast("Profile Updated Sucessfully");
 
   const [profile, setProfiledata] = useState({});
   const toggleCode = () => {
     setShowFirstCode(!showFirstCode);
   };
   const ProfileID = localStorage.getItem("userId");
+
   const fetchprofile = async () => {
     try {
       const res = await updateloginfo(ProfileID);
       setProfiledata(res.data.user);
-      console.log(res.data);
       setUpdateprofile({
         userName: res.data.user.userName,
         email: res.data.user.email,
@@ -30,33 +30,43 @@ const UserInformation = () => {
         state: res.data.user.state,
         pincode: res.data.user.pincode,
       });
-      console.log(updateprofile);
     } catch (err) {
-      console.log(err, "jlsnfel");
+      console.log("Error fetching profile data", err);
     }
   };
+
   useEffect(() => {
     fetchprofile();
   }, []);
 
   const handlesave = async () => {
+    try {
       await getprofile(updateprofile, ProfileID);
-      handlechangepfp();
+      await handlechangepfp();
       setShowFirstCode(!showFirstCode);
       fetchprofile();
+      toast.success("Profile updated successfully");
+    } catch (err) {
+      toast.error("Failed to update profile");
+      console.log("Error updating profile", err);
+    }
   };
+
   const handlechangepfp = async () => {
     try {
       const formdata = new FormData();
       formdata.append("profilePhoto", profile);
-       await changeprofile(formdata, ProfileID);
-       fetchprofile()
+      await changeprofile(formdata, ProfileID);
+      fetchprofile();
     } catch (err) {
-      console.log(err, "sdfb ");
+      toast.error("Failed to change profile photo");
+      console.log("Error changing profile photo", err);
     }
   };
+
   return (
     <div>
+      <ToastContainer />
       {showFirstCode ? (
         <div className="cont">
           <div className="sec2">
@@ -66,7 +76,7 @@ const UserInformation = () => {
                 <img
                   className="user-foto"
                   src={`https://social-blog-api-r3az.onrender.com/${profile.profilePhoto}`}
-                  alt=""
+                  alt="Profile"
                 />
               </div>
               <div className="btn-edit">
@@ -88,46 +98,41 @@ const UserInformation = () => {
                 <div className="ipf">
                   <div>
                     <input
-                      class="form-control"
+                      className="form-control"
                       type="text"
                       placeholder={profile.userName}
-                      aria-label="Example example"
                       disabled
                     />
                   </div>
                   <div>
                     <input
-                      class="form-control"
+                      className="form-control"
                       type="text"
                       placeholder={profile.email}
-                      aria-label="Example example"
                       disabled
                     />
                   </div>
                   <div>
                     <input
-                      class="form-control"
+                      className="form-control"
                       type="text"
                       placeholder={profile.state}
-                      aria-label="Example example"
                       disabled
                     />
                   </div>
                   <div>
                     <input
-                      class="form-control"
+                      className="form-control"
                       type="text"
                       placeholder={profile.pincode}
-                      aria-label="Example example"
                       disabled
                     />
                   </div>
                   <div>
                     <input
-                      class="form-control"
+                      className="form-control"
                       type="text"
                       placeholder={profile.country}
-                      aria-label="Example example"
                       disabled
                     />
                   </div>
@@ -139,7 +144,7 @@ const UserInformation = () => {
       ) : (
         <div>
           <div className="cont">
-            <div className="top-sec">Edit User Information </div>
+            <div className="top-sec">Edit User Information</div>
             <div className="sec2">
               <div className="two-fields">
                 <div className="all-names">
@@ -153,12 +158,11 @@ const UserInformation = () => {
                 <div className="ipf">
                   <div>
                     <input
-                      class="form-control"
+                      className="form-control"
                       type="file"
                       onChange={(e) => {
                         if (e.target.files.length) {
                           const selectpfp = e.target.files[0];
-                          console.log(selectpfp, "asdfgnb");
                           setProfiledata(selectpfp);
                         } else {
                           setProfiledata({});
@@ -168,9 +172,8 @@ const UserInformation = () => {
                   </div>
                   <div>
                     <input
-                      class="form-control"
+                      className="form-control"
                       type="text"
-                      placeholder="Name Example"
                       value={updateprofile.userName}
                       onChange={(e) => {
                         setUpdateprofile({
@@ -178,14 +181,12 @@ const UserInformation = () => {
                           userName: e.target.value,
                         });
                       }}
-                      // aria-label="Example example"
                     />
                   </div>
                   <div>
                     <input
-                      class="form-control"
+                      className="form-control"
                       type="text"
-                      placeholder="Email Example"
                       value={updateprofile.email}
                       onChange={(e) => {
                         setUpdateprofile({
@@ -193,14 +194,12 @@ const UserInformation = () => {
                           email: e.target.value,
                         });
                       }}
-                      // aria-label="Example example"
                     />
                   </div>
                   <div>
                     <input
-                      class="form-control"
+                      className="form-control"
                       type="text"
-                      placeholder="State Example"
                       value={updateprofile.state}
                       onChange={(e) => {
                         setUpdateprofile({
@@ -208,14 +207,12 @@ const UserInformation = () => {
                           state: e.target.value,
                         });
                       }}
-                      // aria-label="Example example"
                     />
                   </div>
                   <div>
                     <input
-                      class="form-control"
+                      className="form-control"
                       type="text"
-                      placeholder="Pincode Example"
                       value={updateprofile.pincode}
                       onChange={(e) => {
                         setUpdateprofile({
@@ -223,14 +220,12 @@ const UserInformation = () => {
                           pincode: e.target.value,
                         });
                       }}
-                      // aria-label="Example example"
                     />
                   </div>
                   <div>
                     <input
-                      class="form-control"
+                      className="form-control"
                       type="text"
-                      placeholder="Country Example"
                       value={updateprofile.country}
                       onChange={(e) => {
                         setUpdateprofile({
@@ -238,12 +233,10 @@ const UserInformation = () => {
                           country: e.target.value,
                         });
                       }}
-                      // aria-label="Example example"
                     />
                   </div>
                 </div>
               </div>
-              {/* </div> */}
             </div>
             <div className="two-btn">
               <div className="edit-info-btn2">
@@ -252,18 +245,9 @@ const UserInformation = () => {
                 </button>
               </div>
               <div className="edit-info-btn2">
-                <button
-                  className="info-btn2"
-                  onClick={() => {
-                    handlesave();
-                    notify();
-                  }}
-                >
+                <button className="info-btn2" onClick={handlesave}>
                   Save
                 </button>
-                {/* <button>
-                  Change password
-                </button> */}
               </div>
             </div>
           </div>

@@ -16,7 +16,7 @@ const Signup = () => {
     password: "",
     confirmPassword: "",
   });
-  const notify = () => toast("SignUp Sucessfully");
+
   const [errors, setErrors] = useState({});
   const handleSubmit = async () => {
     const error = {};
@@ -36,10 +36,11 @@ const Signup = () => {
       try {
         await signupdetail(formData)
         // alert("Signup Sucessfully")
+        toast.success("Signup Sucessfully")
         navigate("/");
       } 
       catch (err) {
-        console.error("Signup failed:", err);
+        toast.error("Signup failed:", err);
       }
     }
       setErrors(error);
@@ -95,7 +96,7 @@ const Signup = () => {
             {errors.confirmPassword && 
               <span className="error msg">{errors.confirmPassword}</span>
             }
-            <button type="submit" onClick={() => {handleSubmit();notify() }} >
+            <button type="submit" onClick={() => {handleSubmit() }} >
               Sign Up
             </button>
           </main>

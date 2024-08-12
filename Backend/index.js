@@ -20,7 +20,6 @@ app.use('/post',createRouter)
 const __filename =fileURLToPath(import.meta.url)
 const __dirname= dirname(__filename)
 app.use("/upload",express.static(join(__dirname,"upload")))
-// app.use("/profile", express.static(join(__dirname,"profile")));
 const connection = process.env.CONNECTION_STRING
 mongoose
   .connect(
