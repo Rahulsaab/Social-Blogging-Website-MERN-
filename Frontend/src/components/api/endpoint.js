@@ -1,13 +1,13 @@
 import axios from "axios";
 
-const BASE_URL = "https://social-blog-api-r3az.onrender.com";
+const BASE_URL = "https://social-blogging-website-mern-fe.onrender.com";
 const token = localStorage.getItem("token");
 
 const API = axios.create({
   baseURL: BASE_URL,
-  headers: {
+ headers: {
     Authorization: `Bearer ${token}`,
-   
+    // "Content-Type": "application/json",
   }
 });
 
